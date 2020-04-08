@@ -52,12 +52,11 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             break;
             }
             case "Инфа":{
-                sendKeyboardMarkupToUser(chatId,menu.getMathReplyKeyboard(),"Выберите группу");
+                sendKeyboardMarkupToUser(chatId,menu.getInfReplyKeyboard(),"Выберите группу");
             break;
             }
             case "Литра":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
             break;
             }
@@ -132,7 +131,8 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                     thing.setText(msg.getText());
                     dao.save(thing);
                     isInEdit = false;
-                }
+                    sendMessageToUser(chatId,"Изменения сохранены");
+                }else
                     sendMessageToUser(chatId, "Извини, но я тебя не понимаю, \nпопробуй нажать /start");
                 break;
             }
@@ -148,14 +148,15 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
     }
 
-    private void handleSubject(String subject,long chatId){
+    private boolean handleSubject(String subject,long chatId){
         if (isInEdit && chatId == 430148873){
             thing = new Thing();
             thing.setTag(subject);
             sendMessageToUser(chatId,"Отправьте мне новое дз");
-            //todo
+            return true;
         }else {
             sendMessageToUser(chatId,dao.getLast(subject).toString());
+            return true;
         }
     }
 
