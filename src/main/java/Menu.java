@@ -115,6 +115,7 @@ public class Menu {
         KeyboardRow algRow = new KeyboardRow();
         KeyboardRow geomRow = new KeyboardRow();
         KeyboardRow backRow = new KeyboardRow();
+        KeyboardRow egeRow = new KeyboardRow();
 
         replyKeyboardMarkup.setOneTimeKeyboard(true);
         replyKeyboardMarkup.setSelective(true);
@@ -123,9 +124,11 @@ public class Menu {
         keyboard.clear();
         algRow.add("Алгебра");
         geomRow.add("Геома");
+        egeRow.add("ЕГЭ");
         backRow.add("Назад");
         keyboard.add(algRow);
         keyboard.add(geomRow);
+        keyboard.add(egeRow);
         keyboard.add(backRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return replyKeyboardMarkup;
