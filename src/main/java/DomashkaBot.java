@@ -75,6 +75,12 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 returnToMenu(chatId);
             break;
             }
+            case "ЕГЭ":{
+                handleSubject(msg.getText(),chatId);
+                //todo скинуть из бд
+                returnToMenu(chatId);
+                break;
+            }
             case "История":{
                 handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
