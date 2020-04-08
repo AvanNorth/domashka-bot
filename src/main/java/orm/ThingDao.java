@@ -43,7 +43,7 @@ public class ThingDao {
             idQuery.setParameter("tagParam", tag);
             List idList = idQuery.list();
             int maxId = (int) idList.get(0);
-            Query query = session.createQuery("from domashka where id = :idParam");
+            Query query = session.createQuery("from Thing where id = :idParam");
             query.setParameter("idParam", maxId);
             Thing thing = (Thing) query.list().get(0);
             return thing;
