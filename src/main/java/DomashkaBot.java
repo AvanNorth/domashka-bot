@@ -4,8 +4,12 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import orm.Thing;
+import orm.ThingDao;
 
 public class DomashkaBot extends TelegramLongPollingCommandBot {
+
+    private boolean isInEdit = false;
     public DomashkaBot() {
         StartCommand startCommand = new StartCommand(this);
         register(startCommand);
@@ -21,6 +25,17 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
         long chatId = msg.getChatId();
         Menu menu = new Menu();
         switch (msg.getText()) {
+            case "Задания":{
+                sendKeyboardMarkupToUser(chatId,menu.getSubjectsKeyboard(),"Выберите предмет");
+            }
+            case "Добавить задания":{
+                if(chatId == 430148873){
+                    isInEdit = true;
+                    sendKeyboardMarkupToUser(chatId,menu.getSubjectsKeyboard(),"Выберите предмет");
+                }else{
+                    sendMessageToUser(chatId, "У вас нет админ-прав!");
+                }
+            }
             case "Матеша":{
                 sendKeyboardMarkupToUser(chatId,menu.getMathReplyKeyboard(),"Выберите раздел");
             break;
@@ -34,64 +49,75 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             break;
             }
             case "Литра":{
-
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
             break;
             }
             case "Биология":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
             break;
             }
             case "Физика":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
             break;
             }
             case "История":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
             break;
             }
             case "Физра":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
             break;
             }
             case "Общага":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
             break;
             }
             case "Группа Шубинкин В.Н":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
                 break;
             }
             case "Алгебра":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
                 break;
             }
             case "Геома":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
                 break;
             }
             case "Группа Бамбуркина Л.В":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
                 break;
             }
             case "Группа Кузьмина Н.О":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
                 break;
             }
             case "Группа Серебрякова М.Г":{
+                handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
-                sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+                returnToMenu(chatId);
                 break;
             }
             default: {
@@ -101,6 +127,25 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
         }
     }
 
+
+    private void returnToMenu(long chatId){
+        Menu menu = new Menu();
+        if (chatId == 430148873){
+            sendKeyboardMarkupToUser(chatId,menu.getAdminMainMenuReplyKeyboard(),"Возвращаю в меню");
+        }else
+            sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+    }
+
+    private void handleSubject(String subject,long chatId){
+        Thing thing;
+        ThingDao dao = new ThingDao();
+        if (isInEdit){
+            //todo
+        }else {
+            thing = dao.getLast(subject);
+            sendMessageToUser(chatId,thing.toString());
+        }
+    }
 
     private void sendMessageToUser(long chatId, String text) {
         SendMessage message = new SendMessage();

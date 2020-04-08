@@ -17,9 +17,24 @@ public class Menu {
 
         keyboard.clear();
         homeworkRow.add("Задания");
-        answersRow.add("Ответы");
         keyboard.add(homeworkRow);
-        keyboard.add(answersRow);
+        replyKeyboardMarkup.setKeyboard(keyboard);
+        return replyKeyboardMarkup;
+    }
+    ReplyKeyboardMarkup getAdminMainMenuReplyKeyboard(){
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        ArrayList<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow homeworkRow = new KeyboardRow();
+        KeyboardRow editRow = new KeyboardRow();
+
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        keyboard.clear();
+        homeworkRow.add("Задания");
+        editRow.add("Добавить задания");
+        keyboard.add(homeworkRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return replyKeyboardMarkup;
     }
