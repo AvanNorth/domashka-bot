@@ -40,3 +40,4 @@ public class Thing {
         this.text = text;
     }
 }
+

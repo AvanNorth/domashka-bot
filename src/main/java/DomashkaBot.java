@@ -10,6 +10,10 @@ import orm.ThingDao;
 public class DomashkaBot extends TelegramLongPollingCommandBot {
 
     private boolean isInEdit = false;
+    private Thing thing;
+    private ThingDao dao = new ThingDao();
+
+
     public DomashkaBot() {
         StartCommand startCommand = new StartCommand(this);
         register(startCommand);
@@ -24,6 +28,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
         Message msg = update.getMessage();
         long chatId = msg.getChatId();
         Menu menu = new Menu();
+
         switch (msg.getText()) {
             case "Задания":{
                 sendKeyboardMarkupToUser(chatId,menu.getSubjectsKeyboard(),"Выберите предмет");
@@ -123,6 +128,11 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 break;
             }
             default: {
+                if (isInEdit){
+                    thing.setText(msg.getText());
+                    dao.save(thing);
+                    isInEdit = false;
+                }
                     sendMessageToUser(chatId, "Извини, но я тебя не понимаю, \nпопробуй нажать /start");
                 break;
             }
@@ -139,13 +149,13 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
     }
 
     private void handleSubject(String subject,long chatId){
-        Thing thing;
-        ThingDao dao = new ThingDao();
         if (isInEdit && chatId == 430148873){
+            thing = new Thing();
+            thing.setTag(subject);
+            sendMessageToUser(chatId,"Отправьте мне новое дз");
             //todo
         }else {
-            thing = dao.getLast(subject);
-            sendMessageToUser(chatId,thing.toString());
+            sendMessageToUser(chatId,dao.getLast(subject).toString());
         }
     }
 

@@ -25,5 +25,6 @@ public final class StartCommand extends BotsCommand {
         else
             message.setReplyMarkup(menu.getMainMenuReplyKeyboard());
         execute(absSender, message, user);
+        System.out.println("ChatId: "+chat.getId());
     }
 }
