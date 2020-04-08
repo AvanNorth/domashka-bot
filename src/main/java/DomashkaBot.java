@@ -35,7 +35,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 break;
             }
             case "Добавить задания":{
-                if(chatId == 430148873 || chatId == 339293658){
+                if(chatId == 430148873 || chatId == 339293658 || chatId == 396945086){
                     isInEdit = true;
                     sendKeyboardMarkupToUser(chatId,menu.getSubjectsKeyboard(),"Выберите предмет");
                 }else{
@@ -87,6 +87,12 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 returnToMenu(chatId);
             break;
             }
+            case "Русский":{
+                handleSubject(msg.getText(),chatId);
+                //todo скинуть из бд
+                returnToMenu(chatId);
+                break;
+            }
             case "Физра":{
                 handleSubject(msg.getText(),chatId);
                 //todo скинуть из бд
@@ -135,6 +141,12 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 returnToMenu(chatId);
                 break;
             }
+            case "География":{
+                handleSubject(msg.getText(),chatId);
+                //todo скинуть из бд
+                returnToMenu(chatId);
+                break;
+            }
             default: {
                 if (isInEdit){
                     thing.setText(msg.getText());
@@ -151,14 +163,14 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
 
     private void returnToMenu(long chatId){
         Menu menu = new Menu();
-        if (chatId == 430148873 || chatId == 339293658){
-            sendKeyboardMarkupToUser(chatId,menu.getAdminMainMenuReplyKeyboard(),"а я пока в меню верну");
+        if (chatId == 430148873 || chatId == 339293658 || chatId == 396945086){
+            sendKeyboardMarkupToUser(chatId,menu.getAdminMainMenuReplyKeyboard(),"<<");
         }else
-            sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
+            sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"<<");
     }
 
     private void handleSubject(String subject,long chatId){
-        if ((isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)) {
+        if ((isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)||(isInEdit && chatId == 396945086)) {
             thing = new Thing();
             thing.setTag(subject);
             sendMessageToUser(chatId,"Отправьте мне новое дз");
