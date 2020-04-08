@@ -156,6 +156,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             return true;
         }else {
             sendMessageToUser(chatId,dao.getLast(subject).getText());
+            System.out.println(dao.getLast(subject).getText());
             return true;
         }
     }
