@@ -141,7 +141,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
     private void handleSubject(String subject,long chatId){
         Thing thing;
         ThingDao dao = new ThingDao();
-        if (isInEdit){
+        if (isInEdit && chatId == 430148873){
             //todo
         }else {
             thing = dao.getLast(subject);
