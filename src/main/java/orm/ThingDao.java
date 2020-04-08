@@ -39,7 +39,7 @@ public class ThingDao {
     public Thing getLast(String tag) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         try {
-            Query idQuery = session.createQuery("SELECT Max(id) from domashka where tag = :tagParam");
+            Query idQuery = session.createQuery("SELECT Max(id) from Thing where tag = :tagParam");
             idQuery.setParameter("tagParam", tag);
             List idList = idQuery.list();
             int maxId = (int) idList.get(0);
@@ -55,7 +55,7 @@ public class ThingDao {
     public List<Thing> getAll(String tag) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         try {
-            Query query = session.createQuery("from domashka where tag = :tagParam");
+            Query query = session.createQuery("from Thing where tag = :tagParam");
             query.setParameter("tagParam", tag);
             List<Thing> thing = query.list();
             return thing;
