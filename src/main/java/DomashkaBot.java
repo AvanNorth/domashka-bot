@@ -43,6 +43,9 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 }
                 break;
             }
+            case "Назад":{
+                returnToMenu(chatId);
+            }
             case "Матеша":{
                 sendKeyboardMarkupToUser(chatId,menu.getMathReplyKeyboard(),"Выберите раздел");
             break;
