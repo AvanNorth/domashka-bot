@@ -27,6 +27,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
         switch (msg.getText()) {
             case "Задания":{
                 sendKeyboardMarkupToUser(chatId,menu.getSubjectsKeyboard(),"Выберите предмет");
+                break;
             }
             case "Добавить задания":{
                 if(chatId == 430148873){
@@ -35,6 +36,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 }else{
                     sendMessageToUser(chatId, "У вас нет админ-прав!");
                 }
+                break;
             }
             case "Матеша":{
                 sendKeyboardMarkupToUser(chatId,menu.getMathReplyKeyboard(),"Выберите раздел");

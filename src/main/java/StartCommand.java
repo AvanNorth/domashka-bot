@@ -20,8 +20,10 @@ public final class StartCommand extends BotsCommand {
         message.setText("Привет, я бот по домашке");
 
         Menu menu = new Menu();
-        message.setReplyMarkup(menu.getMainMenuReplyKeyboard());
-
+        if (chat.getId() == 430148873)
+        message.setReplyMarkup(menu.getAdminMainMenuReplyKeyboard());
+        else
+            message.setReplyMarkup(menu.getMainMenuReplyKeyboard());
         execute(absSender, message, user);
     }
 }
