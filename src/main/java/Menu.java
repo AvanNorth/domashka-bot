@@ -35,6 +35,7 @@ public class Menu {
         homeworkRow.add("Задания");
         editRow.add("Добавить задания");
         keyboard.add(homeworkRow);
+        keyboard.add(editRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return replyKeyboardMarkup;
     }
