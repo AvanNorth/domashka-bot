@@ -35,7 +35,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 break;
             }
             case "Добавить задания":{
-                if(chatId == 430148873){
+                if(chatId == 430148873 || chatId == 339293658){
                     isInEdit = true;
                     sendKeyboardMarkupToUser(chatId,menu.getSubjectsKeyboard(),"Выберите предмет");
                 }else{
