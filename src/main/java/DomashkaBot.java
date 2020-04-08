@@ -148,16 +148,14 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
     }
 
-    private boolean handleSubject(String subject,long chatId){
+    private void handleSubject(String subject,long chatId){
         if (isInEdit && chatId == 430148873){
             thing = new Thing();
             thing.setTag(subject);
             sendMessageToUser(chatId,"Отправьте мне новое дз");
-            return true;
-        }else {
+        }else{
             sendMessageToUser(chatId,dao.getLast(subject).getText());
             System.out.println(dao.getLast(subject).getText());
-            return true;
         }
     }
 
