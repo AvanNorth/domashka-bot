@@ -65,85 +65,71 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             }
             case "Биология":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
             break;
             }
             case "Физика":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
             break;
             }
             case "ЕГЭ":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
             case "История":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
             break;
             }
             case "Русский":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
             case "Физра":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
             break;
             }
             case "Общага":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
             break;
             }
             case "Группа Шубинкин В.Н":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
             case "Алгебра":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
             case "Геома":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
             case "Группа Бамбуркина Л.В":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
             case "Группа Кузьмина Н.О":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
             case "Группа Серебрякова М.Г":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
             case "География":{
                 handleSubject(msg.getText(),chatId);
-                //todo скинуть из бд
                 returnToMenu(chatId);
                 break;
             }
@@ -153,6 +139,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                     dao.save(thing);
                     isInEdit = false;
                     sendMessageToUser(chatId,"Изменения сохранены");
+                    //todo дата и актуальность
                 }else
                     sendMessageToUser(chatId, "Извини, но я тебя не понимаю, \nпопробуй нажать /start");
                 break;
@@ -170,12 +157,17 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
     }
 
     private void handleSubject(String subject,long chatId){
+        String lastText;
         if ((isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)||(isInEdit && chatId == 396945086)) {
             thing = new Thing();
             thing.setTag(subject);
             sendMessageToUser(chatId,"Отправьте мне новое дз");
         }else{
-            sendMessageToUser(chatId,dao.getLast(subject).getText());
+            lastText = dao.getLast(subject).getText();
+            if(lastText.isEmpty())
+                sendMessageToUser(chatId,"Тут ничего нет(");
+            else
+                sendMessageToUser(chatId,lastText);
             System.out.println(dao.getLast(subject).getText());
         }
     }

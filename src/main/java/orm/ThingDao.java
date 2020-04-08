@@ -46,6 +46,7 @@ public class ThingDao {
             Query query = session.createQuery("from Thing where id = :idParam");
             query.setParameter("idParam", maxId);
             Thing thing = (Thing) query.list().get(0);
+            session.close();
             return thing;
         } catch (Exception e) {
             return null;
@@ -58,6 +59,7 @@ public class ThingDao {
             Query query = session.createQuery("from Thing where tag = :tagParam");
             query.setParameter("tagParam", tag);
             List<Thing> thing = query.list();
+            session.close();
             return thing;
         } catch (Exception e) {
             return null;
