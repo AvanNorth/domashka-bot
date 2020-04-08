@@ -155,7 +155,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             sendMessageToUser(chatId,"Отправьте мне новое дз");
             return true;
         }else {
-            sendMessageToUser(chatId,dao.getLast(subject).toString());
+            sendMessageToUser(chatId,dao.getLast(subject).getText());
             return true;
         }
     }
