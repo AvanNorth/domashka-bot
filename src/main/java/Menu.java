@@ -75,17 +75,16 @@ public class Menu {
         infaRow.add("Инфа");
         keyboard.add(mathRow);
         keyboard.add(rusRow);
-        keyboard.add(rusRow);
         keyboard.add(literatureRow);
         keyboard.add(physRow);
         keyboard.add(bioRow);
         keyboard.add(historyRow);
         keyboard.add(geoRow);
         keyboard.add(peRow);
-        keyboard.add(backRow);
         keyboard.add(obshRow);
         keyboard.add(engRow);
         keyboard.add(infaRow);
+        keyboard.add(backRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return replyKeyboardMarkup;
     }
@@ -94,6 +93,7 @@ public class Menu {
         ArrayList<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow shubRow = new KeyboardRow();
         KeyboardRow gr2Row = new KeyboardRow();
+        KeyboardRow backRow = new KeyboardRow();
 
         replyKeyboardMarkup.setOneTimeKeyboard(true);
         replyKeyboardMarkup.setSelective(true);
@@ -102,8 +102,10 @@ public class Menu {
         keyboard.clear();
         shubRow.add("Группа Шубинкин В.Н");
         gr2Row.add("Группа Бамбуркина Л.В");
+        backRow.add("Назад");
         keyboard.add(shubRow);
         keyboard.add(gr2Row);
+        keyboard.add(backRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return replyKeyboardMarkup;
     }
@@ -112,6 +114,7 @@ public class Menu {
         ArrayList<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow algRow = new KeyboardRow();
         KeyboardRow geomRow = new KeyboardRow();
+        KeyboardRow backRow = new KeyboardRow();
 
         replyKeyboardMarkup.setOneTimeKeyboard(true);
         replyKeyboardMarkup.setSelective(true);
@@ -120,8 +123,10 @@ public class Menu {
         keyboard.clear();
         algRow.add("Алгебра");
         geomRow.add("Геома");
+        backRow.add("Назад");
         keyboard.add(algRow);
         keyboard.add(geomRow);
+        keyboard.add(backRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return replyKeyboardMarkup;
     }
@@ -130,6 +135,7 @@ public class Menu {
         ArrayList<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow KuzRow = new KeyboardRow();
         KeyboardRow gr2Row = new KeyboardRow();
+        KeyboardRow backRow = new KeyboardRow();
 
         replyKeyboardMarkup.setOneTimeKeyboard(true);
         replyKeyboardMarkup.setSelective(true);
@@ -138,8 +144,10 @@ public class Menu {
         keyboard.clear();
         KuzRow.add("Группа Кузьмина Н.О");
         gr2Row.add("Группа Серебрякова М.Г");
+        backRow.add("Назад");
         keyboard.add(KuzRow);
         keyboard.add(gr2Row);
+        keyboard.add(backRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return replyKeyboardMarkup;
     }
