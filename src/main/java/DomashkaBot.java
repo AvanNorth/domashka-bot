@@ -45,6 +45,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             }
             case "Назад":{
                 returnToMenu(chatId);
+                break;
             }
             case "Матеша":{
                 sendKeyboardMarkupToUser(chatId,menu.getMathReplyKeyboard(),"Выберите раздел");
@@ -164,7 +165,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             sendMessageToUser(chatId,"Отправьте мне новое дз");
         }else{
             lastText = dao.getLast(subject).getText();
-            if(lastText.isEmpty())
+            if(lastText==null)
                 sendMessageToUser(chatId,"Тут ничего нет(");
             else
                 sendMessageToUser(chatId,lastText);
