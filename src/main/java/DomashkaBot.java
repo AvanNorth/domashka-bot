@@ -21,7 +21,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
         long chatId = msg.getChatId();
         Menu menu = new Menu();
         switch (msg.getText()) {
-           case "Матеша":{
+            case "Матеша":{
                 sendKeyboardMarkupToUser(chatId,menu.getMathReplyKeyboard(),"Выберите раздел");
             break;
            }
@@ -34,6 +34,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
             break;
             }
             case "Литра":{
+
                 //todo скинуть из бд
                 sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
             break;
@@ -94,9 +95,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 break;
             }
             default: {
-                if (!msg.getText().equals("/start")) {
                     sendMessageToUser(chatId, "Извини, но я тебя не понимаю, \nпопробуй нажать /start");
-                }
                 break;
             }
         }
