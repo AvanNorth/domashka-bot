@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://ec2-54-247-78-30.eu-west-1.compute.amazonaws.com:5432/dfmrhs0p4jkk4u</property>
+        <property name="hibernate.connection.username">rzdwwqpfkeatmy</property>
+        <property name="hibernate.connection.password">ddbda5ff851d47c546cffd36dc650633d8c4907c04278c0568395d0784df82af</property>
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+    </session-factory>
+</hibernate-configuration>
