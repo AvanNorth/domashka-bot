@@ -145,14 +145,14 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
 
     private void returnToMenu(long chatId){
         Menu menu = new Menu();
-        if (chatId == 430148873){
-            sendKeyboardMarkupToUser(chatId,menu.getAdminMainMenuReplyKeyboard(),"Возвращаю в меню");
+        if (chatId == 430148873 || chatId == 339293658){
+            sendKeyboardMarkupToUser(chatId,menu.getAdminMainMenuReplyKeyboard(),"а я пока в меню верну");
         }else
             sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"Возвращаю в меню");
     }
 
     private void handleSubject(String subject,long chatId){
-        if (isInEdit && chatId == 430148873){
+        if ((isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)) {
             thing = new Thing();
             thing.setTag(subject);
             sendMessageToUser(chatId,"Отправьте мне новое дз");
