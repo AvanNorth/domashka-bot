@@ -3,7 +3,7 @@ package orm;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "things")//название табл
+@Table(name = "domashka")//название табл
 public class Thing {
 
     //название перменных должно быть таким же, как и в бд, поэтому не изменять!
