@@ -195,9 +195,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
     private void handleSubject(String subject,long chatId){
         String lastText;
         if (isAdmin(chatId)&&dao.getLast(Long.toString(chatId)).getText().equals("true")) {
-            thing = new Thing();
-            thing.setTag(subject);
-            thing.setId(Arrays.asList(subjects).indexOf(subject));
+            thing = dao.getLast(subject);
             sendMessageToUser(chatId,"Отправьте мне новое дз");
         }else{
             lastText = dao.getLast(subject).getText();
