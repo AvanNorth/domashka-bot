@@ -49,6 +49,7 @@ public class ThingDao {
             session.close();
             return thing;
         } catch (Exception e) {
+            session.close();
             return null;
         }
     }
@@ -62,6 +63,7 @@ public class ThingDao {
             session.close();
             return thing;
         } catch (Exception e) {
+            session.close();
             return null;
         }
     }
