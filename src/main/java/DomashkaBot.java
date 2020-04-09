@@ -147,6 +147,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                     //todo сделать красиво и хорошо (если руки дойдут вообще)
                     thing.setText(msg.getText());
                     dao.update(thing);
+                    isInEdit = dao.getLast(Long.toString(chatId));
                     isInEdit.setText("false");
                     dao.update(isInEdit);
                     sendMessageToUser(chatId,"Изменения сохранены");
