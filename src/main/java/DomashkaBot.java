@@ -7,11 +7,15 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import orm.Thing;
 import orm.ThingDao;
 
+import java.util.Arrays;
+
 public class DomashkaBot extends TelegramLongPollingCommandBot {
 
-    private boolean isInEdit = false;
+   // private boolean isInEdit = false;
     private Thing thing;
+    private Thing isInEdit;
     private ThingDao dao = new ThingDao();
+    private String[] admins = {"430148873","339293658","396945086"};
 
 
     public DomashkaBot() {
@@ -35,8 +39,12 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 break;
             }
             case "Добавить задания":{
-                if(chatId == 430148873 || chatId == 339293658 || chatId == 396945086){
-                    isInEdit = true;
+                if(isAdmin(chatId)){//chatId == 430148873 || chatId == 339293658 || chatId == 396945086){
+                    isInEdit = new Thing();
+                    isInEdit.setTag(Long.toString(chatId));
+                    isInEdit.setText("true");
+                    dao.update(isInEdit);
+                    //isInEdit = true;
                     sendKeyboardMarkupToUser(chatId,menu.getSubjectsKeyboard(),"Выберите предмет");
                 }else{
                     sendMessageToUser(chatId, "У вас нет админ-прав!");
@@ -135,10 +143,12 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 break;
             }
             default: {
-                if (isInEdit){
+                if (isAdmin(chatId)&&isInEdit.getText().equals("true")){//(isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)||(isInEdit && chatId == 396945086)){
+                    //todo сделать красиво и хорошо (если руки дойдут вообще)
                     thing.setText(msg.getText());
-                    dao.save(thing);
-                    isInEdit = false;
+                    dao.update(thing);
+                    isInEdit.setText("false");
+                    dao.update(isInEdit);
                     sendMessageToUser(chatId,"Изменения сохранены");
                     //todo дата и актуальность
                 }else
@@ -151,21 +161,26 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
 
     private void returnToMenu(long chatId){
         Menu menu = new Menu();
-        if (chatId == 430148873 || chatId == 339293658 || chatId == 396945086){
+        if (isAdmin(chatId)){
             sendKeyboardMarkupToUser(chatId,menu.getAdminMainMenuReplyKeyboard(),"<<");
         }else
             sendKeyboardMarkupToUser(chatId,menu.getMainMenuReplyKeyboard(),"<<");
     }
 
+    private boolean isAdmin(long chatId){
+        return Arrays.asList(admins).contains(Long.toString(chatId));
+    }
+
+
     private void handleSubject(String subject,long chatId){
         String lastText;
-        if ((isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)||(isInEdit && chatId == 396945086)) {
+        if (isAdmin(chatId)) {
             thing = new Thing();
             thing.setTag(subject);
             sendMessageToUser(chatId,"Отправьте мне новое дз");
         }else{
             lastText = dao.getLast(subject).getText();
-            if(lastText==null)
+            if(dao.getLast(subject)==null)
                 sendMessageToUser(chatId,"Тут ничего нет(");
             else
                 sendMessageToUser(chatId,lastText);
