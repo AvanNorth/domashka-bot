@@ -143,7 +143,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 break;
             }
             default: {
-                if (isAdmin(chatId)&&isInEdit.getText().equals("true")){//(isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)||(isInEdit && chatId == 396945086)){
+                if (isAdmin(chatId)&&dao.getLast(Long.toString(chatId)).getText().equals("true")){//(isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)||(isInEdit && chatId == 396945086)){
                     //todo сделать красиво и хорошо (если руки дойдут вообще)
                     thing.setText(msg.getText());
                     dao.update(thing);
@@ -174,7 +174,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
 
     private void handleSubject(String subject,long chatId){
         String lastText;
-        if (isAdmin(chatId)) {
+        if (isAdmin(chatId)&&dao.getLast(Long.toString(chatId)).getText().equals("true")) {
             thing = new Thing();
             thing.setTag(subject);
             sendMessageToUser(chatId,"Отправьте мне новое дз");
