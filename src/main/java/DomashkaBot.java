@@ -15,7 +15,26 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
     private Thing thing;
     private Thing isInEdit;
     private ThingDao dao = new ThingDao();
-    private String[] admins = {"430148873","339293658","396945086"};
+   //todo перенести в константы
+   private String[] admins = {"430148873","339293658","396945086"};
+   private String[] subjects =
+           {
+           "Алгебра",
+           "Геома",
+           "Егэ",
+           "Русский",
+           "Литра",
+           "Биология",
+           "Физика",
+           "История",
+           "География",
+           "Физра",
+           "Общага",
+           "Группа Кузьмина Н.О",
+           "Группа Серебрякова М.Г",
+           "Группа Шубинкин В.Н",
+           "Группа Бамбуркина Л.В",
+            };
 
 
     public DomashkaBot() {
@@ -146,7 +165,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
                 if (isAdmin(chatId)&&dao.getLast(Long.toString(chatId)).getText().equals("true")){//(isInEdit && chatId == 430148873) || (isInEdit && chatId == 339293658)||(isInEdit && chatId == 396945086)){
                     //todo сделать красиво и хорошо (если руки дойдут вообще)
                     thing.setText(msg.getText());
-                    dao.save(thing);
+                    dao.update(thing);
                     isInEdit = dao.getLast(Long.toString(chatId));
                     isInEdit.setText("false");
                     dao.update(isInEdit);
@@ -178,6 +197,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
         if (isAdmin(chatId)&&dao.getLast(Long.toString(chatId)).getText().equals("true")) {
             thing = new Thing();
             thing.setTag(subject);
+            thing.setId(Arrays.asList(subjects).indexOf(subject));
             sendMessageToUser(chatId,"Отправьте мне новое дз");
         }else{
             lastText = dao.getLast(subject).getText();
