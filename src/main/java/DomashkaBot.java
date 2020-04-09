@@ -21,7 +21,7 @@ public class DomashkaBot extends TelegramLongPollingCommandBot {
            {
            "Алгебра",
            "Геома",
-           "Егэ",
+           "ЕГЭ",
            "Русский",
            "Литра",
            "Биология",
