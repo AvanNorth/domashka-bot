@@ -14,24 +14,7 @@ public final class StartCommand extends BotsCommand {
         super("start", "старт");
         mCommandRegistry = commandRegistry;
     }
-    private String[] subjects =
-            {
-                    "Алгебра",
-                    "Геома",
-                    "ЕГЭ",
-                    "Русский",
-                    "Литра",
-                    "Биология",
-                    "Физика",
-                    "История",
-                    "География",
-                    "Физра",
-                    "Общага",
-                    "Группа Кузьмина Н.О",
-                    "Группа Серебрякова М.Г",
-                    "Группа Шубинкин В.Н",
-                    "Группа Бамбуркина Л.В",
-            };
+
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
@@ -39,14 +22,6 @@ public final class StartCommand extends BotsCommand {
         message.setChatId(chat.getId().toString());
         message.setText("Привет, я бот по домашке");
 
-        ThingDao dao = new ThingDao();
-        Thing thing = new Thing();
-        thing.setText("Пусто");
-        for (int i=0;i<subjects.length;i++){
-            thing.setId(i);
-            thing.setTag(subjects[i]);
-            dao.save(thing);
-        }
         Menu menu = new Menu();
         if (chat.getId() == 430148873 || chat.getId() == 339293658 || chat.getId() == 396945086)
         message.setReplyMarkup(menu.getAdminMainMenuReplyKeyboard());
