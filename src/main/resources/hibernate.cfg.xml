@@ -7,9 +7,9 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://ec2-54-247-89-181.eu-west-1.compute.amazonaws.com:5432/d1ljgs3b0gn9uc</property>
-        <property name="hibernate.connection.username">ndvpumukmcnndp</property>
-        <property name="hibernate.connection.password">58250f968c3a15b082b39f6f28b859dd04607638fe253f216d7936c827af507e</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://ec2-46-137-177-160.eu-west-1.compute.amazonaws.com:5432/daf3jodv69gb26</property>
+        <property name="hibernate.connection.username">qrgvdtxamaltoc</property>
+        <property name="hibernate.connection.password">9257fe85b1c7abe3c0b4b80ddf1dab277fbb18ac69668ad8d5155ca2354e49c0</property>
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <!-- SQL dialect -->
